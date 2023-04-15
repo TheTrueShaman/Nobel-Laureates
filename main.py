@@ -17,7 +17,7 @@ def get_nobel():
                 birth_key = 'founded'
             laureate = {
                 'id': new_laureate['id'],
-                'name': '\'' + new_laureate[name_key]['en'].replace(',', '') + '\'',
+                'name': '\'' + new_laureate[name_key]['en'].replace(',', '').replace('\'', '') + '\'',
                 'gender': check_exists(new_laureate, ['gender']),
                 'birth_date': check_exists(new_laureate, [birth_key, 'date']),
                 'birth_country': check_exists(new_laureate, [birth_key, 'place', 'country', 'en']),
@@ -51,7 +51,7 @@ def check_exists(dictionary, sub_keys):
 def laureate_line(laureate):
     insert = "INSERT INTO laureates(ID, Name, Gender, Birth_Date, Birth_Country, Death_Date, " \
              "Death_Country, Prize_Amount, Prize_Years, Prize_Categories) "
-    a = "VALUES ({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}))\n".format(laureate['id'], laureate['name'],
+    a = "VALUES ({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9});\n".format(laureate['id'], laureate['name'],
                                                                               laureate['gender'],
                                                                               laureate['birth_date'],
                                                                               laureate['birth_country'],
